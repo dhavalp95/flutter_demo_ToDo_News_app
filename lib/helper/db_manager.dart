@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:my_auth_app/models/todo_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -37,7 +38,6 @@ class DBManager {
 
   // Create table
   Future<void> _createTable(Database db, int version) async {
-    print('CREATE NEW TABLE');
     return await db.execute('''
     CREATE TABLE $tableName (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -63,6 +63,7 @@ class DBManager {
     List<ToDoData> listToDos = [];
     for (final singleDic in dictData) {
       final obj = ToDoData(
+        id: singleDic['id'] as int,
         title: singleDic['title'] as String,
         descriptoin: singleDic['description'] as String,
         priority: singleDic['priority'] as int,
@@ -72,7 +73,28 @@ class DBManager {
     }
     return listToDos;
   }
+
   // Delete
+  Future<int> deleteToDo(int id) async {
+    final db = await database;
+    return await db.delete(
+      tableName,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 
   // Update
+  Future<int> updateToDo({
+    required int id,
+    required Map<String, dynamic> map,
+  }) async {
+    final db = await database;
+    return await db.update(
+      tableName,
+      map,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }

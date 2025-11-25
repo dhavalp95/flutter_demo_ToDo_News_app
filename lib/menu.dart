@@ -5,7 +5,7 @@ import 'package:my_auth_app/login.dart';
 import 'package:my_auth_app/models/todo_model.dart';
 import 'package:my_auth_app/one.dart';
 import 'package:my_auth_app/two.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyMenu extends StatefulWidget {
@@ -30,15 +30,41 @@ class _MyMenuState extends State<MyMenu> {
   // Create single item of list View
   Widget createView(BuildContext context, int index) {
     final data = todoList[index];
+    var bgColor = Colors.teal.shade100;
+    if (data.isDone) {
+      bgColor = Colors.grey.shade300;
+    } else if (data.priority == 1) {
+      bgColor = Colors.red.shade200;
+    } else if (data.priority == 2) {
+      bgColor = Colors.blue.shade200;
+    }
 
     return Card(
-      color: Colors.pink.shade100,
+      color: bgColor,
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: ListTile(
-        leading: Icon(Icons.list_alt),
+        onLongPress: () async {
+          // update todo
+          Map<String, dynamic> dataDic = {'isDone': data.isDone ? 0 : 1};
+
+          await DBManager.shared.updateToDo(
+            id: data.id,
+            map: dataDic,
+          );
+
+          //fetch updated data
+          fetchToDoList();
+        },
+        leading: data.isDone ? Icon(Icons.done_outline) : null,
         title: Text(data.title),
         subtitle: Text(data.descriptoin),
-        trailing: Icon(Icons.delete),
+        trailing: InkWell(
+          onTap: () async {
+            await DBManager.shared.deleteToDo(data.id);
+            fetchToDoList();
+          },
+          child: Icon(Icons.delete),
+        ),
       ),
     );
   }
