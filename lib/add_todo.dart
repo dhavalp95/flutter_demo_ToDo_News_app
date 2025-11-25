@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_auth_app/helper/db_manager.dart';
-import 'package:my_auth_app/models/todo_model.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({super.key});

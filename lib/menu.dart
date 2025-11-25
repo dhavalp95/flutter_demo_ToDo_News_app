@@ -3,6 +3,7 @@ import 'package:my_auth_app/add_todo.dart';
 import 'package:my_auth_app/helper/db_manager.dart';
 import 'package:my_auth_app/login.dart';
 import 'package:my_auth_app/models/todo_model.dart';
+import 'package:my_auth_app/news.dart';
 import 'package:my_auth_app/one.dart';
 import 'package:my_auth_app/two.dart';
 //import 'package:google_fonts/google_fonts.dart';
@@ -157,6 +158,22 @@ class _MyMenuState extends State<MyMenu> {
               decoration: BoxDecoration(color: Colors.indigoAccent),
               child: Text('User Details'),
             ),*/
+            ListTile(
+              leading: Icon(Icons.newspaper),
+              title: Text('NEWS'),
+              onTap: () {
+                //Close menu before open new screen
+                Navigator.pop(context);
+
+                // Open ONE screeen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) => NewsScreen(),
+                  ),
+                );
+              },
+            ),
 
             // Home Optoin
             ListTile(
