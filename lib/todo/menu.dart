@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_auth_app/add_todo.dart';
+import 'package:my_auth_app/todo/add_todo.dart';
 import 'package:my_auth_app/helper/db_manager.dart';
 import 'package:my_auth_app/login.dart';
 import 'package:my_auth_app/models/todo_model.dart';
-import 'package:my_auth_app/news.dart';
+import 'package:my_auth_app/news/news.dart';
 import 'package:my_auth_app/one.dart';
 import 'package:my_auth_app/two.dart';
 //import 'package:google_fonts/google_fonts.dart';
