@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_auth_app/helper/db_manager.dart';
+//import 'package:my_auth_app/helper/db_manager.dart';
+import 'package:my_auth_app/helper/db_manager_web.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({super.key});
@@ -101,7 +102,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                   'isDone': isComplted ? 1 : 0,
                 };
 
-                final insertRows = await DBManager.shared.insertToDo(
+                final insertRows = await DBManagerWeb.shared.insertToDo(
                   dataDict,
                 );
 

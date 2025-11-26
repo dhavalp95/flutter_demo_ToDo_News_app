@@ -2,9 +2,9 @@ import 'package:my_auth_app/models/todo_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DBManager {
+class DBManager1 {
   // Singletone object
-  static var shared = DBManager();
+  static var shared = DBManager1();
 
   final tableName = 'todos';
 

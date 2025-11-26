@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_auth_app/helper/db_manager_web.dart';
 import 'package:my_auth_app/todo/add_todo.dart';
-import 'package:my_auth_app/helper/db_manager.dart';
+//import 'package:my_auth_app/helper/db_manager.dart';
 import 'package:my_auth_app/login.dart';
 import 'package:my_auth_app/models/todo_model.dart';
 import 'package:my_auth_app/news/news.dart';
@@ -24,7 +25,7 @@ class _MyMenuState extends State<MyMenu> {
   }
 
   fetchToDoList() async {
-    todoList = await DBManager.shared.fetchToDos();
+    todoList = await DBManagerWeb.shared.fetchToDos();
     setState(() {});
   }
 
@@ -48,7 +49,7 @@ class _MyMenuState extends State<MyMenu> {
           // update todo
           Map<String, dynamic> dataDic = {'isDone': data.isDone ? 0 : 1};
 
-          await DBManager.shared.updateToDo(
+          await DBManagerWeb.shared.updateToDo(
             id: data.id,
             map: dataDic,
           );
@@ -61,7 +62,7 @@ class _MyMenuState extends State<MyMenu> {
         subtitle: Text(data.descriptoin),
         trailing: InkWell(
           onTap: () async {
-            await DBManager.shared.deleteToDo(data.id);
+            await DBManagerWeb.shared.deleteToDo(data.id);
             fetchToDoList();
           },
           child: Icon(Icons.delete),
